@@ -53,7 +53,7 @@
   }
 
   .sub-header {
-    @apply text-18-bold md:text-24-bold;
+    @apply text-2xl md:text-24-bold;
   }
 
   .container {
@@ -183,7 +183,7 @@
 
   /* =====  SHADCN OVERRIDES */
   .shad-primary-btn {
-    @apply bg-green-500 text-white !important;
+    @apply bg-blue-400 text-white !important;
   }
 
   .shad-danger-btn {
@@ -347,4 +347,39 @@
 
 .PhoneInputInput::placeholder {
   color: #1a1d21;
+}
+
+.registerVideo {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  object-fit: fill;
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  filter: brightness(0.5);
+}
+.welcomeVideo {
+  width: 50vw;
+  height: 100vh;
+  height: 100dvh;
+  object-fit: fill;
+  /* z-index: -1; */
+  /* position: fixed;
+  top: 0;
+  left: 0; */
+  filter: brightness(0.8);
+}
+@media screen and (max-width: 800px) {
+  .welcomeVideo {
+    width: 100vw;
+    height: 25vh;
+    height: 23dvh;
+    /* z-index: -1; */
+    /* position: fixed;
+    top: 0;
+    left: 0; */
+    filter: brightness(0.8);
+  }
 }

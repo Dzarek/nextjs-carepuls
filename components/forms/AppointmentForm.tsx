@@ -10,18 +10,9 @@ import { useState } from "react";
 import { UserFormValidation } from "@/lib/validation";
 import { useRouter } from "next/navigation";
 import { createUser } from "@/lib/actions/patient.actions";
+import { FormFieldType } from "./PatientForm";
 
-export enum FormFieldType {
-  INPUT = "input",
-  TEXTAREA = "textarea",
-  PHONE_INPUT = "phoneInput",
-  CHECKBOX = "checkbox",
-  DATE_PICKER = "datePicker",
-  SELECT = "select",
-  SKELETON = "skeleton",
-}
-
-const PatientForm = () => {
+const AppointmentForm = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -62,8 +53,10 @@ const PatientForm = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
         <section className="mb-8 space-y-4 text-center">
-          <h1 className="header">How we can help you? </h1>
-          <p className="text-dark-700">Schedule your first appointment.</p>
+          <h1 className="header">New Appointment </h1>
+          <p className="text-dark-700">
+            Request a new appointment in 10 seconds.
+          </p>
         </section>
         <CustomFormField
           fieldType={FormFieldType.INPUT}
@@ -97,4 +90,4 @@ const PatientForm = () => {
   );
 };
 
-export default PatientForm;
+export default AppointmentForm;
