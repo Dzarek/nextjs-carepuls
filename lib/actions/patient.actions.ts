@@ -59,7 +59,9 @@ export const registerPatient = async ({
         );
 
       file = await storage.createFile(BUCKET_ID!, ID.unique(), inputFile);
+      console.log(file);
     }
+
     // Create new patient document -> https://appwrite.io/docs/references/cloud/server-nodejs/databases#createDocument
     const newPatient = await databases.createDocument(
       DATABASE_ID!,
@@ -87,6 +89,8 @@ export const getPatient = async (userId: string) => {
       PATIENT_COLLECTION_ID!,
       [Query.equal("userId", userId)]
     );
+    console.log(patients.documents[0]);
+
     return parseStringify(patients.documents[0]);
   } catch (error) {
     console.log(error);

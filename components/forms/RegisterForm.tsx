@@ -9,7 +9,6 @@ import { useState } from "react";
 import { PatientFormValidation } from "../../lib/validation";
 import { useRouter } from "next/navigation";
 import { registerPatient } from "@/lib/actions/patient.actions";
-import { FormFieldType } from "./PatientForm";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import {
   Doctors,
@@ -20,7 +19,17 @@ import {
 import { Label } from "../ui/label";
 import { SelectItem } from "../ui/select";
 import Image from "next/image";
-import FileUploader from "../FileUploader";
+import { FileUploader } from "../FileUploader";
+
+export enum FormFieldType {
+  INPUT = "input",
+  TEXTAREA = "textarea",
+  PHONE_INPUT = "phoneInput",
+  CHECKBOX = "checkbox",
+  DATE_PICKER = "datePicker",
+  SELECT = "select",
+  SKELETON = "skeleton",
+}
 
 const RegisterForm = ({ user }: { user: User }) => {
   const router = useRouter();
@@ -40,7 +49,6 @@ const RegisterForm = ({ user }: { user: User }) => {
   // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof PatientFormValidation>) => {
     setIsLoading(true);
-    console.log("dupa");
 
     // Store file info in form data as
     let formData;
@@ -56,6 +64,7 @@ const RegisterForm = ({ user }: { user: User }) => {
       formData.append("blobFile", blobFile);
       formData.append("fileName", values.identificationDocument[0].name);
     }
+
     try {
       const patientData = {
         ...values,
@@ -65,7 +74,6 @@ const RegisterForm = ({ user }: { user: User }) => {
       };
       // @ts-ignore
       const patient = await registerPatient(patientData);
-      console.log(patientData);
 
       if (patient) router.push(`/patients/${user.$id}/new-appointment`);
     } catch (error) {
@@ -171,7 +179,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           <CustomFormField
             fieldType={FormFieldType.INPUT}
             control={form.control}
-            name="emergenyContactName"
+            name="emergencyContactName"
             label="Emergency contact name"
             placeholder="Guardian's name"
           />
@@ -223,8 +231,8 @@ const RegisterForm = ({ user }: { user: User }) => {
           <CustomFormField
             fieldType={FormFieldType.INPUT}
             control={form.control}
-            name="insurencePolicyNumber"
-            label="Insurence Policy Number"
+            name="insurancePolicyNumber"
+            label="Insurance Policy Number"
             placeholder="ABC123456789"
           />
         </div>
@@ -293,7 +301,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           fieldType={FormFieldType.SKELETON}
           control={form.control}
           name="identificationDocument"
-          label="Scanned copy of identification document"
+          label="Scanned Copy of Identification Document"
           renderSkeleton={(field) => (
             <FormControl>
               <FileUploader files={field.value} onChange={field.onChange} />

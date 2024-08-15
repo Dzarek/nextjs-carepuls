@@ -6,9 +6,10 @@ export default async function NewAppointment({
   params: { userId },
 }: SearchParamProps) {
   const patient = await getPatient(userId);
+
   return (
     <div className="flex h-screen max-h-screen">
-      <section className="remove-scrollbar container my-auto shadow-inner shadow-white md:shadow-none">
+      <section className="remove-scrollbar container my-auto -ml-20">
         <div className="sub-container max-w-[860px] flex-1 justify-between">
           <Image
             src="/assets/icons/logo-full.svg"
@@ -17,15 +18,9 @@ export default async function NewAppointment({
             alt="patient"
             className="mb-12 h-10 w-fit"
           />
-          <AppointmentForm
-            type="create"
-            userId={userId}
-            patientId={patient.$id}
-          />
+          <AppointmentForm patientId={patient} userId={userId} type="create" />
 
-          <p className="justify-items-end text-dark-600 xl:text-left">
-            © 2024 CarePulse
-          </p>
+          <p className="copyright  py-12">© 2024 CarePulse</p>
         </div>
       </section>
       <Image
@@ -33,7 +28,7 @@ export default async function NewAppointment({
         height={1000}
         width={1000}
         alt="appointment"
-        className="side-img max-w-[390px] bg-bottom"
+        className="side-img max-w-[390px] bg-bottom fixed right-0 top-0"
       />
     </div>
   );
