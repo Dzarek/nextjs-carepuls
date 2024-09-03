@@ -56,7 +56,6 @@ const AppointmentForm = ({
       default:
         status = "pending";
     }
-    console.log(patientId);
 
     try {
       if (type === "create" && patientId) {
@@ -70,11 +69,10 @@ const AppointmentForm = ({
           status: status as Status,
         };
         const appointment = await createAppointment(appointmentData);
-        console.log("bbb");
         if (appointment) {
           form.reset();
           router.push(
-            `/patients/${userId}/new-appointment/sucess?appointmentId=${appointment.id}`
+            `/patients/${userId}/new-appointment/success?appointmentId=${appointment.$id}`
           );
         }
       }

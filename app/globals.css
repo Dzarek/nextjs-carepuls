@@ -369,7 +369,7 @@
   /* position: fixed;
   top: 0;
   left: 0; */
-  filter: brightness(0.8);
+  filter: brightness(0.7);
 }
 @media screen and (max-width: 800px) {
   .welcomeVideo {
